@@ -9,14 +9,12 @@
     tools:context=".ui.main.HomeFragment">
 
     <TextView
-        android:id="@+id/tv_home_logo"
-        android:layout_width="143dp"
-        android:layout_height="114dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="64dp"
-        android:background="#FFFFFF"
-        android:text="로고 다시 만들거야"
-        android:textSize="30sp"
+        android:id="@+id/textView17"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:background="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,16 +22,16 @@
         android:id="@+id/tv_home_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="12dp"
         android:fontFamily="serif"
         android:text="AEGIS"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="60sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_home_logo"
-        app:layout_constraintStart_toEndOf="@+id/tv_home_logo"
-        app:layout_constraintTop_toTopOf="@+id/tv_home_logo" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -84,8 +82,7 @@
             android:layout_weight="1"
             android:background="#C1C1C1"
             android:paddingLeft="10dp"
-            android:paddingTop="20dp"
-            android:text="TextView"
+            android:paddingTop="5dp"
             android:textColor="#000000"
             android:textSize="20sp" />
     </LinearLayout>
@@ -95,17 +92,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="180dp"
+        android:backgroundTint="#DCDCDC"
         android:src="@drawable/ic_baseline_local_phone_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_home_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <ImageButton
         android:id="@+id/btn_home_danger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#DCDCDC"
         android:src="@drawable/ic_baseline_report_problem_24"
         app:layout_constraintBottom_toBottomOf="@+id/btn_home_tell"
         app:layout_constraintStart_toEndOf="@+id/btn_home_tell"
         app:layout_constraintTop_toTopOf="@+id/btn_home_tell" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

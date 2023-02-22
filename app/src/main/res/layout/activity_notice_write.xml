@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".NoticeWrite">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="111dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="공지 등록"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edt_nwrite_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:ems="10"
+        android:hint="제목을 입력하세요."
+        android:inputType="textPersonName"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <EditText
+        android:id="@+id/edt_nwrite_content"
+        android:layout_width="0dp"
+        android:layout_height="466dp"
+        android:layout_marginTop="16dp"
+        android:background="#D6D6D6"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="공지사항 입력"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_nwrite_content">
+
+        <Button
+            android:id="@+id/btn_nwrite_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:insetRight="3dp"
+            android:text="취소" />
+
+        <Button
+            android:id="@+id/btn_notice_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:insetLeft="3dp"
+            android:text="확인" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

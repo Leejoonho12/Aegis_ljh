@@ -1,23 +1,13 @@
 package com.example.myapplication1213;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -30,20 +20,14 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TellPopup extends Activity {
+public class NoticeWrite extends AppCompatActivity {
 
-    InputMethodManager imm;
-    ListView lv_tell;
-    TellAdapter adapter;
-    Button btn_pop_fin;
+    private EditText edt_nwrite_title, edt_nwrite_content;
+    private Button btn_nwrite_back, btn_notice_input;
 
     //서버로 요청하는 객체
     private RequestQueue queue;
@@ -55,35 +39,25 @@ public class TellPopup extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_tell_popup);
+        setContentView(R.layout.activity_notice_write);
 
-        lv_tell = findViewById(R.id.lv_tell);
-        btn_pop_fin = findViewById(R.id.btn_pop_fin);
-
-        sendRequest();
-
-        lv_tell.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TellVO vo = (TellVO) parent.getItemAtPosition(position);
-                String aa = "tel:"+vo.getTnum();
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(aa));
-
-                if(ContextCompat.checkSelfPermission(TellPopup.this,
-                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-
-                    ActivityCompat.requestPermissions(TellPopup.this,
-                            new String[]{Manifest.permission.CALL_PHONE},0);
-                    return;
-                }
-
-                startActivity(intent);
-            }
-        });
-        btn_pop_fin.setOnClickListener(new View.OnClickListener() {
+        edt_nwrite_title = findViewById(R.id.edt_nwrite_title);
+        edt_nwrite_content = findViewById(R.id.edt_nwrite_content);
+        btn_nwrite_back = findViewById(R.id.btn_nwrite_back);
+        btn_notice_input = findViewById(R.id.btn_notice_input);
+        btn_nwrite_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+        btn_notice_input.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //서버로 내용 보내 줄거임.
+                sendRequest();
+                Intent intent = new Intent();
+                setResult(RESULT_OK,intent);
                 finish();
             }
         });
@@ -92,9 +66,9 @@ public class TellPopup extends Activity {
 
     public void sendRequest() {
         // Volley Lib 새로운 요청객체 생성
-        queue = Volley.newRequestQueue(this);
+        queue = Volley.newRequestQueue(NoticeWrite.this);
         // 서버에 요청할 주소(cmd : ipconfig, eclips : servers : HTTP/1.1)
-        String url = "http://172.17.102.233:8087/AndroidServer/ProjectTellList";
+        String url = "http://172.17.102.233:8087/AndroidServer/ProjectNoticeInput";
 
         // 요청 문자열 저장
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -102,19 +76,6 @@ public class TellPopup extends Activity {
             @Override
             public void onResponse(String response) {
                 Log.v("resultValue", response);
-                adapter = new TellAdapter();
-                lv_tell = findViewById(R.id.lv_tell);
-                lv_tell.setAdapter(adapter);
-                imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    for(int i = 0; i < jsonArray.length(); i++){
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        adapter.addItem(jsonObject.getString("name"), jsonObject.getString("tellnum"));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
         }, new Response.ErrorListener() {
             // 서버와의 연동 에러시 출력
@@ -141,6 +102,11 @@ public class TellPopup extends Activity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
+
+                params.put("title", edt_nwrite_title.getText().toString());
+                params.put("content", edt_nwrite_content.getText().toString());
+                params.put("worker", "admin");
+
                 return params;
             }
         };

@@ -14,9 +14,10 @@ public class HomeViewModel extends ViewModel {
         title = new MutableLiveData<>();
         title.setValue("AEGIS");
         contentw = new MutableLiveData<>();
-        contentw.setValue("비콘 스캐너를 통해 파악된\n위치 데이터 노출\n\nA 구역 n명\nB 구역 n명");
+        contentw.setValue("비콘 스캐너를 통해 파악된\n위치 데이터 노출\n\nA 구역 3명\nB 구역 2명");
         contents = new MutableLiveData<>();
-        contents.setValue("오늘의 날씨\n\n센서값 1 : -\n센서값 2 : -\n센서값 3 : -\n센서값 4 : -\n센서값 5 : -");
+        contents.setValue("온도 : -1℃\n습도 : 54%\n톨루엔농도 : 821㎍/㎥\n아세톤농도 : 27ppm\n암모니아농도 : 11ppm\n"
+        +"이산화탄소농도 : 756ppm\n일산화탄소농도 : 166ppm\n포름알데히드농도 : 124㎍/㎥");
     }
 
     public LiveData<String> getTitle() {

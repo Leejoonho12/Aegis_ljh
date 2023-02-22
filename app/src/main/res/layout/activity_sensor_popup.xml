@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".SensorPopup">
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="250dp"
+        android:layout_height="400dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="온도"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="습도"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="톨루엔 농도"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rb4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="아세톤 농도"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rb5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="암모니아 농도"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rb6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="일산화탄소 농도"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rb7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="이산화탄소 농도"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rb8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="포름알데히드 농도"
+            android:textColor="#000000" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_shutdown"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radio_group" />
+</androidx.constraintlayout.widget.ConstraintLayout>

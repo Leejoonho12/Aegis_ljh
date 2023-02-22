@@ -3,6 +3,7 @@
     package="com.example.myapplication1213">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -13,6 +14,29 @@
         android:theme="@style/Theme.MyApplication1213"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".DangeresPopup"
+            android:exported="false"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".NoticePopup"
+            android:exported="false"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".dayChoicePopup"
+            android:exported="false"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".ScheduleInput"
+            android:exported="false"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".SensorPopup"
+            android:exported="false"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".NoticeWrite"
+            android:exported="false" />
+        <activity
             android:name=".DangerPopup"
             android:exported="false"
             android:theme="@android:style/Theme.Dialog" />
@@ -22,18 +46,18 @@
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".Login"
-            android:exported="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.MyApplication1213.NoActionBar">
+            android:theme="@style/Theme.MyApplication1213.NoActionBar" >
         </activity>
     </application>
 

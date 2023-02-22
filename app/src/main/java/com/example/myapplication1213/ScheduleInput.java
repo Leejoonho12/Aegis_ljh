@@ -1,22 +1,16 @@
 package com.example.myapplication1213;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -30,21 +24,14 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TellPopup extends Activity {
+public class ScheduleInput extends Activity {
 
-    InputMethodManager imm;
-    ListView lv_tell;
-    TellAdapter adapter;
-    Button btn_pop_fin;
-
+    EditText edt_schpop_name, edt_schpop_startDate, edt_schpop_endDate;
+    Button btn_schpop_commit;
     //서버로 요청하는 객체
     private RequestQueue queue;
     //서버로 요청시 필요한 정보를 담는 객체
@@ -56,34 +43,17 @@ public class TellPopup extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_tell_popup);
+        setContentView(R.layout.activity_schedule_input);
 
-        lv_tell = findViewById(R.id.lv_tell);
-        btn_pop_fin = findViewById(R.id.btn_pop_fin);
+        edt_schpop_name = findViewById(R.id.edt_schpop_name);
+        edt_schpop_startDate = findViewById(R.id.edt_schpop_startDate);
+        edt_schpop_endDate = findViewById(R.id.edt_schpop_endDate);
+        btn_schpop_commit = findViewById(R.id.btn_schpop_commit);
 
-        sendRequest();
-
-        lv_tell.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TellVO vo = (TellVO) parent.getItemAtPosition(position);
-                String aa = "tel:"+vo.getTnum();
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(aa));
-
-                if(ContextCompat.checkSelfPermission(TellPopup.this,
-                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-
-                    ActivityCompat.requestPermissions(TellPopup.this,
-                            new String[]{Manifest.permission.CALL_PHONE},0);
-                    return;
-                }
-
-                startActivity(intent);
-            }
-        });
-        btn_pop_fin.setOnClickListener(new View.OnClickListener() {
+        btn_schpop_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sendRequest();
                 finish();
             }
         });
@@ -94,7 +64,7 @@ public class TellPopup extends Activity {
         // Volley Lib 새로운 요청객체 생성
         queue = Volley.newRequestQueue(this);
         // 서버에 요청할 주소(cmd : ipconfig, eclips : servers : HTTP/1.1)
-        String url = "http://172.17.102.233:8087/AndroidServer/ProjectTellList";
+        String url = "http://172.30.1.34:8087/AndroidServer/ProjectSchduleInput";
 
         // 요청 문자열 저장
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -102,19 +72,6 @@ public class TellPopup extends Activity {
             @Override
             public void onResponse(String response) {
                 Log.v("resultValue", response);
-                adapter = new TellAdapter();
-                lv_tell = findViewById(R.id.lv_tell);
-                lv_tell.setAdapter(adapter);
-                imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    for(int i = 0; i < jsonArray.length(); i++){
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        adapter.addItem(jsonObject.getString("name"), jsonObject.getString("tellnum"));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
         }, new Response.ErrorListener() {
             // 서버와의 연동 에러시 출력
@@ -141,6 +98,11 @@ public class TellPopup extends Activity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put("name", edt_schpop_name.getText().toString());
+                params.put("content", "내용 없음");
+                params.put("startDate", edt_schpop_startDate.getText().toString());
+                params.put("endDate", edt_schpop_endDate.getText().toString());
+                params.put("writer", "admin");
                 return params;
             }
         };

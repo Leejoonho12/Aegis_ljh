@@ -12,14 +12,51 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_sensor"
-        android:name="com.example.myapplication1213.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_worker"
+        android:name="com.example.myapplication1213.ui.workers.WorkersFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_workers" />
 
     <fragment
-        android:id="@+id/nav_worker"
-        android:name="com.example.myapplication1213.ui.slideshow.SlideshowFragment"
+        android:id="@+id/nav_sensor"
+        android:name="com.example.myapplication1213.ui.sensor.SensorFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_sensor" />
+
+    <fragment
+        android:id="@+id/nav_workerSearch"
+        android:name="com.example.myapplication1213.ui.workerSearch.WorkerSearchFragment"
+        android:label="@string/menu_workerSearch"
+        tools:layout="@layout/worker_search_fragment" />
+
+    <fragment
+        android:id="@+id/nav_schedule"
+        android:name="com.example.myapplication1213.ui.schedule.ScheduleFragment"
+        android:label="@string/menu_schedule"
+        tools:layout="@layout/schedule_fragment" />
+
+    <fragment
+        android:id="@+id/nav_notice"
+        android:name="com.example.myapplication1213.ui.Notice.NoticeFragment"
+        android:label="@string/menu_notice"
+        tools:layout="@layout/notice_fragment" />
+
+    <fragment
+    android:id="@+id/nav_setting"
+    android:name="com.example.myapplication1213.ui.setting.SettingFragment"
+    android:label="@string/menu_setting"
+    tools:layout="@layout/setting_fragment" />
+
+    <fragment
+        android:id="@+id/nav_joinSelect"
+        android:name="com.example.myapplication1213.ui.joinselect.JoinSelectFragment"
+        android:label="@string/menu_joinSelect"
+        tools:layout="@layout/join_select_fragment" />
+
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.example.myapplication1213.ui.logout.LogoutFragment"
+        android:label="@string/menu_logout"
+        tools:layout="@layout/fragment_logout" />
+
 </navigation>
